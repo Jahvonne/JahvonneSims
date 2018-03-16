@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Sims</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Mina" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  body {
+      font: 400 15px 'Slabo 27px', sans-serif;
+      line-height: 1.8;
+      color: #1E7FC0;
+  }
+  h2 {
+      font-size: 24px;
+      text-transform: uppercase;
+      color: #000000;
+      font-weight: 600;
+      margin-bottom: 30px;
+  }
+  h4 {
+      font-size: 19px;
+      line-height: 1.375em;
+      color: #1E7FC0;
+      font-weight: 400;
+      margin-bottom: 30px;
+  }  
+  .jumbotron {
+      background-color: #000000;
+      color: #fff;
+      padding: 100px 25px;
+      font-family: Mina;
+  }
+  .container-fluid {
+      padding: 60px 50px;
+  }
+  .bg-grey {
+      background-color: #000000;
+  }
+  .logo-small {
+      color: #1E7FC0;
+      font-size: 50px;
+  }
+  .logo {
+      color: #1E7FC0;
+      font-size: 200px;
+  }
+  .thumbnail {
+      padding: 0 0 15px 0;
+      border: none;
+      border-radius: 0;
+  }
+  .thumbnail img {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 10px;
+  }
+  .carousel-control.right, .carousel-control.left {
+      background-image: none;
+      color: #1E7FC0;
+  }
+  .carousel-indicators li {
+      border-color: #1E7FC0;
+  }
+  .carousel-indicators li.active {
+      background-color: #1E7FC0;
+  }
+  .item h4 {
+      font-size: 19px;
+      line-height: 1.375em;
+      font-weight: 400;
+      font-style: italic;
+      margin: 70px 0;
+  }
+  .item span {
+      font-style: normal;
+  }
+  .panel {
+      border: 1px solid #000000; 
+      border-radius:0 !important;
+      transition: box-shadow 0.5s;
+  }
+  .panel:hover {
+      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+  }
+  .panel-footer .btn:hover {
+      border: 1px solid #000000;
+      background-color: #fff !important;
+      color: #1E7FC0;
+  }
+  .panel-heading {
+      color: #fff !important;
+      background-color: #000000 !important;
+      padding: 25px;
+      border-bottom: 1px solid transparent;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+  }
+  .panel-footer {
+      background-color: Blue !important;
+  }
+  .panel-footer h3 {
+      font-size: 32px;
+  }
+  .panel-footer h4 {
+      color: #aaa;
+      font-size: 14px;
+  }
+  .panel-footer .btn {
+      margin: 15px 0;
+      background-color: #000000;
+      color: #fff;
+  }
+  .navbar {
+      margin-bottom: 0;
+      background-color: #000000;
+      z-index: 9999;
+      border: 0;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+      font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #1E7FC0 !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #000000 !important;
+      background-color: #fff !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #1E7FC0!important;
+  }
+  footer .glyphicon {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #000000;
+  }
+  .slideanim {visibility:hidden;}
+  .slide {
+      animation-name: slide;
+      -webkit-animation-name: slide;
+      animation-duration: 1s;
+      -webkit-animation-duration: 1s;
+      visibility: visible;
+  }
+  @keyframes slide {
+    0% {
+      opacity: 0;
+      transform: translateY(70%);
+    } 
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  @-webkit-keyframes slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    } 
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+    .btn-lg {
+        width: 100%;
+        margin-bottom: 35px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .logo {
+        font-size: 150px;
+    }
+  }
+  </style>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">The Sims</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#services">Games</a></li>
+        <li><a href="#portfolio">Other</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <h1>The Sims</h1> 
+  <p>We specialize in</p> 
+  <form>
+    <div class="input-group">
+      <input type="email" class="form-control" size="50" placeholder="Email Address" required>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-danger">Subscribe</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Container (About Section) -->
+<div id="about" class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>About Sims</h2><br>
+      <h4>The Sims is a life simulation game series that was developed by Maxis and The Sims Studio and published by Electronic Arts. The franchise has sold nearly 200 million copies worldwide, and it is one of the best-selling video games series of all time.</h4><br>
+      <br><button class="btn btn-default btn-lg">Get in Touch</button>
+    </div>
+    <div class="col-sm-4">
+		<img src="https://yt3.ggpht.com/a-/AJLlDp2govvgIlTMCe7Xu00Fkl3TLM-rcjXzlEyGKA=s900-mo-c-c0xffffffff-rj-k-no" width="300px">
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-grey">
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="https://img.buzzfeed.com/buzzfeed-static/static/2017-11/14/5/asset/buzzfeed-prod-fastlane-02/sub-buzz-21132-1510653782-3.png?downsize=715:*&output-format=auto&output-quality=autos" width="300px">
+    </div>
+    <div class="col-sm-8">
+      <h2>Our Values</h2><br>
+      <h4><strong>MISSION:</strong> The Sims is a life simulation game series that was developed by Maxis and The Sims Studio and published by Electronic Arts. The franchise has sold nearly 200 million copies worldwide, and it is one of the best-selling video games series of all time</h4><br>
+      <p><strong>FUN FACT:</strong> The Sims" is the sixth-best-selling video game franchise (200 million sold)</p>
+    </div>
+  </div>
+</div>
+
+<!-- Container (Services Section) -->
+<div id="services" class="container-fluid text-center">
+  <h2>SERVICES</h2>
+  <h4>What we offer</h4>
+  <br>
+  <div class="row slideanim">
+    <div class="col-sm-4">
+      <span class="logo-small"><img src="http://tvmedia.ign.com/tv/image/object/123/123277/Sims-Free-to-Play_BUTTON.jpg" width="200px"></span>
+      <h4>Sims Freeplay</h4>
+      <p>Create an entire town of Sims with their own sytle, personalities and dreams</p>
+    </div>
+    <div class="col-sm-4">
+      <span class="logo-small"><img src="https://cdn2.techadvisor.co.uk/cmsdata/features/3532548/Get-The-Sims-2-free.jpg"width="200px"></span>
+      <h4>Sims 2</h4>
+      <p>An incredible sequel to the best-selling PC game of all-time! you'll get to direct an entire Sims' lifetime and try to get them to reach their life goals.</p>
+    </div>
+    <div class="col-sm-4">
+      <span class="logo-small"><img src="http://files.i-sims.webnode.com.br/200000031-0418805125/SIMS3logoPRIMARY1280x1024.png"width="200px"></span>
+      <h4>Sims 3</h4>
+      <p>The freedom of The Sims 3 will inspire you with endlesscreative possibilities and amuse you with unexpected moments of surprise and mischief</p>
+    </div>
+  </div>
+  <br><br>c
+  <div class="row slideanim">
+    <div class="col-sm-4">
+      <span class="logo-small"><img src="https://upload.wikimedia.org/wikipedia/ka/3/32/The_Sims_4_Box_Art.png"width="200px"></span>
+      <h4>Sims 4</h4>
+      <p>Enjoy the power to create and control people in a virtual world where there are no rules now on PC and CONSOLE</p>
+    </div>
+    <div class="col-sm-4">
+      <span class="logo-small"><img src="https://media.contentapi.ea.com/content/dam/eacom/en-us/migrated-images/2017/03/the-sims-mobile-featured-image.jpg.adapt.crop191x100.1200w.jpg"width="200px"></span>
+      <h4>Sims Mobile</h4>
+      <p>Coming Soon.....</p>
+    </div>
+    <div class="col-sm-4">
+      <span class="logo-small"><img src= "http://rgmmatrix.com/wp-content/uploads/2013/11/My-Sims-Sky-Heroes1.jpg"width="200px"></span>
+      <h4 style="color:#303030;">MySims Sky-Heroes</h4>
+      <p>MySims SkyHeroes is a video game developed by Behaviour Interactive and published by Electronic Arts, the sixth in the MySims series. </p>
+    </div>
+  </div>
+</div>
+
+<!-- Container (Portfolio Section) -->
+<div id="portfolio" class="container-fluid text-center bg-grey">
+  <h2>Portfolio</h2><br>
+  <h4>What we have created</h4>
+  <div class="row text-center slideanim">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+         <alt="The Sims franchise" width="400" height="300">
+        <p><strong>MySims Party</strong></p>
+        <p>MySims Party is a video game developed and published by Electronic Arts. It is the third game in the MySims series. </p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <alt="The Sims franchise" width="400" height="300">
+        <p><strong>My Sims Kingdom</strong></p>
+        <p>MySims Kingdom is a video game developed by EA Redwood Shores and published by Electronic Arts.</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <alt="The Sims franchise" width="400" height="300">
+        <p><strong>MySims Racing</strong></p>
+        <p>MySims Racing is a go-kart-car racing game developed by Electronic Arts  The Sims series of games.</p>
+      </div>
+    </div>
+  </div><br>
+  
+  <h2>What our customers say</h2>
+  <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <h4>"This company is the best. I am so happy with the Merch That I can Get!"<br><span>Michael Roe, Customer </span></h4>
+      </div>
+      <div class="item">
+        <h4>"I love Sims Omg this helps so much!"<br><span>John Doe, Customer</span></h4>
+      </div>
+      <div class="item">
+        <h4>"Loving the new website"<br><span>Williams, Jed, BestFriends With creator</span></h4>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+<!-- Container (TOUR Section) -->
+<div id="tour" class="bg-1">
+  <div class="container">
+    <h3 class="text-center">SALE DATES</h3>
+    <p class="text-center">Sales on some merch<br> Buy them now!</p>
+    <ul class="list-group">
+      <li class="list-group-item">Green Plumbob shirt <span class="label label-danger">Ends in 6 Days </span></li>
+      <li class="list-group-item">Women Lovely<span class="label label-danger">Ends in 4 Days!</span></li> 
+      <li class="list-group-item">Celebrate The Sims Mobile<span class="badge">Starts in 10 Days!</span></li> 
+    </ul>
+    
+    <div class="row text-center">
+      <div class="col-sm-4">
+        <div class="thumbnail">
+          <img src="" alt="Clothing" width="400" height="300">
+          <p><strong>Green Plumbob Shirt</strong></p>
+          <p>Thrusday March 15-21 2018</p>
+          <button class="btn" data-toggle="modal" data-target="#myModal">Buy!</button>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="thumbnail">
+          <img src="https://cdn-images.threadless.com/threadless-media/artist_shops/shops/thesims/products/361789/shirt-1510249594-f47fcfe0a2cbbb4ac146921e6f6001ce.png?v=3&d=eyJvbmx5X21ldGEiOiBmYWxzZSwgImZvcmNlIjogZmFsc2UsICJvcHMiOiBbWyJ0cmltc2NyaXB0IiwgWzgxNC4yODU3MTQyODU3MTQyLCAxNDgzLjQyODU3MTQyODU3MTNdLCB7fV0sIFsiZW5jb2RlIiwgWyIucG5nIl0sIHsiZHBpIjogMzAwfV0sIFsicmVzaXplIiwgWzgwMF0sIHt9XSwgWyJvdmVybGF5IiwgWyJ0aHJlYWRsZXNzLW1lZGlhL2FydGlzdF9zaG9wcy9vdmVybGF5cy9jYXRlZ29yaWVzL3dvbWVucy9zaXplcy8qL3N0eWxlcy90cmlibGVuZC10ZWUvY29sb3JzLyovZnJvbnQucG5nIl0sIHsieSI6IDYwMCwgIngiOiA5NzUsICJiYWNrZ3JvdW5kIjogImYwZjBmMiJ9XSwgWyJyZXNpemUiLCBbODAwXSwge31dLCBbImNhbnZhc19jZW50ZXJlZCIsIFs4MDAsIDgwMCwgIiNmZmZmZmYiXSwge31dLCBbImVuY29kZSIsIFsianBnIiwgODVdLCB7fV1dfQ==" alt="New York" width="400" height="300">
+          <p><strong>Women Lovely</strong></p>
+          <p>Sunday 25 March 2018</p>
+          <button class="btn" data-toggle="modal" data-target="#myModal">Coming soon!</button>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="thumbnail">
+          <img src="https://cdn-images.threadless.com/threadless-media/artist_shops/shops/thesims/products/454381/shirt-1520289650-23333f7dc5bc0ed1f4cc9e31e3ac2feb.png?v=3&d=eyJvbmx5X21ldGEiOiBmYWxzZSwgImZvcmNlIjogZmFsc2UsICJvcHMiOiBbWyJ0cmltc2NyaXB0IiwgWzEyNzAuNTcxNDI4NTcxNDI4NCwgMTUwOC44NTcxNDI4NTcxNDI3XSwge31dLCBbImVuY29kZSIsIFsiLnBuZyJdLCB7ImRwaSI6IDMwMH1dLCBbInJlc2l6ZSIsIFs3ODRdLCB7fV0sIFsib3ZlcmxheSIsIFsidGhyZWFkbGVzcy1tZWRpYS9hcnRpc3Rfc2hvcHMvb3ZlcmxheXMvZjI0MzVjMGExNTM0MWE2N2JmN2U4NTE0NWI5YTg3ZjQvZnJvbnQtMTQ5Njc3OTE0MC03Mzk1ZWYxYmRkMmZjNThlYzU0ZTQ1ZTI3N2M3NWFhNy5wbmciXSwgeyJ5IjogNTA2LCAieCI6IDYwNywgImJhY2tncm91bmQiOiAiZmZmZmZmIn1dLCBbInJlc2l6ZSIsIFs4MDBdLCB7fV0sIFsiY2FudmFzX2NlbnRlcmVkIiwgWzgwMCwgODAwLCAiI2ZmZmZmZiJdLCB7fV0sIFsiZW5jb2RlIiwgWyJqcGciLCA4NV0sIHt9XV19" alt="San Francisco" width="400" height="300">
+          <p><strong>Celebrate The Sims Mobile</strong></p>
+          <p>Monday 19 March 2018</p>
+          <button class="btn" data-toggle="modal" data-target="#myModal">Buy!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Container (Pricing Section) -->
+<div id="pricing" class="container-fluid">
+  <div class="text-center">
+    <h2>Merch</h2>
+    <h4>Get something you like. Show your love for Sims</h4>
+  </div>
+  <div class="row slideanim">
+    <div class="col-sm-4 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Men Sul Sul Pullover Hoody</h1>
+        </div>
+        <div class="panel-body">
+          <p><strong>20</strong> Extra Small</p>
+          <p><strong>15</strong> Small</p>
+          <p><strong>10</strong> Medium</p>
+          <p><strong>5</strong> Large</p>
+          <p><strong>2</strong> Extra Large</p>
+        </div>
+        <div class="panel-footer">
+          <h3>$35</h3>
+          <h4>Buy Now!</h4>
+          <button class="btn btn-lg">Buy</button>
+        </div>
+      </div>      
+    </div>     
+    <div class="col-sm-4 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Women Lovely llama</h1>
+        </div>
+        <div class="panel-body">
+          <p><strong>20</strong> Extra Small</p>
+          <p><strong>15</strong> Small</p>
+          <p><strong>10</strong> Medium</p>
+          <p><strong>5</strong> Large</p>
+          <p><strong>2</strong> Extra Large</p>
+        </div>
+        <div class="panel-footer">
+          <h3>$29</h3>
+          <h4>Buy Now!</h4>
+          <button class="btn btn-lg">Buy</button>
+        </div>
+      </div>      
+    </div>       
+    <div class="col-sm-4 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Celebrate The Sims Mobile</h1>
+        </div>
+        <div class="panel-body">
+          <p><strong>20</strong> Extra Small</p>
+          <p><strong>15</strong> Small</p>
+          <p><strong>10</strong> Medium</p>
+          <p><strong>5</strong> Large</p>
+          <p><strong>2</strong> Extra Large</p>
+        </div>
+        <div class="panel-footer">
+          <h3>$15</h3>
+          <h4>Buy Now!</h4>
+          <button class="btn btn-lg">Buy</button>
+        </div>
+      </div>      
+    </div>    
+  </div>
+</div>
+
+<!-- Container (Contact Section) -->
+<div id="contact" class="container-fluid bg-grey">
+  <h2 class="text-center">CONTACT</h2>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>Need Help, Contact us and we'll get back to you within 24 hours.</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span>Electronic Arts' Redwood City campus</p>
+      <p><span class="glyphicon glyphicon-phone"></span> 347-782-9918</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> JahvonneGuy@jamaicagateway.com</p>
+    </div>
+    <div class="col-sm-7 slideanim">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-default pull-right" type="submit">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Google Maps -->
+<div id="googleMap" style="height:400px;width:100%;"></div>
+<script>
+function myMap() {
+var myCenter = new google.maps.LatLng(37.5630, 122.3255);
+var mapProp = {center:myCenter, zoom:12, scrollwheel:false, draggable:false, mapTypeId:google.maps.MapTypeId.ROADMAP};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+var marker = new google.maps.Marker({position:myCenter});
+marker.setMap(map);
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUzFDp1NbUiHz8oiejOZiECLmgjgUbpoc&callback=myMap"></script>
+<!--
+To use this code on your website, get a free API key from Google.
+Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+-->
+
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p>Website made by <a href="Jahvonne Guy" title="Visit w3schools">Jahvonne Guy</a></p>
+</footer>
+
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+ <script>
+   $('div').on('click', function() {
+       $(this).toggleClass('show-description');
+   });
+ </script>
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+})
+</script>
+<script>
+$("button").on("click", function() {
+  alert("Purchased!");
+});
+  </script>
+</body>
+</html>
